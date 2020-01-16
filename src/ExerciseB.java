@@ -1,5 +1,7 @@
-public class ExerciseA {
-    public static final int NUM_ITER = 5;
+public class ExerciseB {
+    public static final int NUM_ITER = 1000;
+    public static Counter counter = new Counter(0);
+
 
     static class MyThread extends Thread {
         private String name;
@@ -14,7 +16,8 @@ public class ExerciseA {
 
         public void run () {
             for (int i = 0; i < NUM_ITER; i++) {
-                writeHello();
+                //writeHello();
+                counter.increment();
             }
         }
     }
@@ -24,10 +27,11 @@ public class ExerciseA {
         Thread b = new MyThread("B");
 
         a.start();
-        //a.join(); // with this here we only se B results are A is finished
         b.start();
 
         a.join();
         b.join();
+
+        System.out.println(counter.value());
     }
 }
